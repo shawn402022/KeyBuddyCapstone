@@ -24,4 +24,5 @@ class User(db.Model):
             'email': self.email,
         }
 
+
 # Add the relationships between models here

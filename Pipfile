@@ -5,13 +5,13 @@ name = "pypi"
 
 [packages]
 flask = "*"
+python-dotenv = "*"
 sqlalchemy = "*"
 flask-sqlalchemy = "*"
-python-dotenv = "*"
+alembic = "*"
+flask-migrate = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.9"
-
-
