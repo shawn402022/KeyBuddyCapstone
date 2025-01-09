@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class SongChord(db.Model):
     __tablename__ = 'song_chords'
@@ -6,6 +7,8 @@ class SongChord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chord_id = db.Column(db.Integer)
     song_id = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
 

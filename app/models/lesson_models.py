@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class Lesson(db.Model):
     __tablename__ = 'lessons'
@@ -13,6 +14,8 @@ class Lesson(db.Model):
     songs = db.Column(db.String(40), nullable=False)
     chords = db.Column(db.String(40), nullable=False)
     progressions = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
     # Create a method to spit out a dictionary version of the course object for JSON serialization

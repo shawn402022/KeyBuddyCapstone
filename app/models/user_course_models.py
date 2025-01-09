@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class UserCourse(db.Model):
     __tablename__ = 'user_courses'
@@ -7,6 +8,8 @@ class UserCourse(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     course_id = db.Column(db.Integer, nullable=False)
     published = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
 

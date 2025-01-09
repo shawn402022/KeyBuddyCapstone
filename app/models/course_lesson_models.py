@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class CourseLesson(db.Model):
     __tablename__ = 'course_lessons'
@@ -6,7 +7,8 @@ class CourseLesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lesson_id = db.Column(db.Integer, nullable=False)
     course_id = db.Column(db.Integer, nullable=False)
-
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
 

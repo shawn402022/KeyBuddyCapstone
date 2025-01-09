@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -8,6 +9,8 @@ class User(db.Model):
     full_name = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
     # Create a method to spit out a dictionary version of the course object for JSON serialization
@@ -20,3 +23,5 @@ class User(db.Model):
             'full_name': self.full_name,
             'email': self.email,
         }
+
+# Add the relationships between models here

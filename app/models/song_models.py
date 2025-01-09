@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class Song(db.Model):
     __tablename__ = 'songs'
@@ -9,6 +10,8 @@ class Song(db.Model):
     artist = db.Column(db.String(40), nullable=False)
     chords_used = db.Column(db.String(40), nullable=False)
     progression_used = db.Column(db.String(40), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
     # Create a method to spit out a dictionary version of the course object for JSON serialization
