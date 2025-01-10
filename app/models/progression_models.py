@@ -10,11 +10,15 @@ class Progression(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
-    # Create a method to spit out a dictionary version of the course object for JSON serialization
+    # Relationships
+    lesson_progressions = db.relationship('Lesson', back_populates='progression_models')
+    song_progression_models = db.relationship('Song', back_populates='progression_models')
 
 
     def to_dict(self):
         return {
             "id": self.id,
             "progression_name": self.progression_name,
+            "lesson_progressions": [lp.to_dict() for lp in self.lesson_progressions],
+            "song_progression_models": [spm.to_dict() for spm in self.song_progression_models]
         }

@@ -21,11 +21,7 @@ print(f"DATABASE_URL from env: {os.environ.get('DATABASE_URL')}")
 app = Flask(__name__)
 
 #configurate the server with env variables
-app.config.from_mapping({
-    'SQLALCHEMY_DATABASE_URI' : os.environ.get("DATABASE_URL"),
-    'SQLALCHEMY_TRACK_MODIFICATIONS' : False,
-    'SECRET_KEY' : os.environ.get("SECRET_KEY")
-    })
+app.config.from_object(Config)
 
 # Debug print to check if SQLALCHEMY_DATABASE_URI is set in app.config
 print(f"SQLALCHEMY_DATABASE_URI in app.config: {app.config.get('SQLALCHEMY_DATABASE_URI')}")

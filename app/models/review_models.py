@@ -11,7 +11,9 @@ class Review(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
-    # Create a method to spit out a dictionary version of the course object for JSON serialization
+    # relationships
+    course_reviews = db.relationship('CourseReview', back_populates='reviews')
+
 
 
     def to_dict(self):
@@ -19,4 +21,5 @@ class Review(db.Model):
             "id": self.id,
             "review_title": self.review_title,
             "review": self.review,
+            "course_reviews": [cr.to_dict() for cr in self.course_reviews]
         }

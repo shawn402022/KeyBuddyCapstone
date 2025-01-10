@@ -14,7 +14,11 @@ class Song(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
-    # Create a method to spit out a dictionary version of the course object for JSON serialization
+    # relationships
+    song_progression_models = db.relationship('SongProgression', back_populates='songs')
+    song_chords = db.relationship('SongChord', back_populates='songs')
+    lesson_songs = db.relationship('LessonSong', back_populates='songs')
+    song_keys = db.relationship('SongKey', back_populates='songs')
 
 
     def to_dict(self):
@@ -25,4 +29,8 @@ class Song(db.Model):
             "artist": self.artist,
             "chords_used": self.chords_used,
             "progression_used": self.progression_used,
+            "song_progression_models": [spm.to_dict() for spm in self.song_progression_models],
+            "song_chords": [sc.to_dict() for sc in self.song_chords],
+            "lesson_songs": [ls.to_dict() for ls in self.lesson_songs],
+            "song_keys": [sk.to_dict() for sk in self.song_keys]
         }

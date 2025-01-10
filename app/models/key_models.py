@@ -10,11 +10,18 @@ class Key(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
 
-    # Create a method to spit out a dictionary version of the course object for JSON serialization
+    # relationships
+    lesson_keys = db.relationship('LessonKey', back_populates='keys')
+    song_keys = db.relationship('SongKey', back_populates='keys')
+
+
+
 
 
     def to_dict(self):
         return {
             "id": self.id,
             "key_name": self.key_name,
+            "lesson_keys": [lk.to_dict() for lk in self.lesson_keys],
+            "song_keys": [sk.to_dict() for sk in self.song_keys]
         }

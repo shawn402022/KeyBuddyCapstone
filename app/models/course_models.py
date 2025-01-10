@@ -10,12 +10,17 @@ class Course(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,onupdate=datetime.utcnow)
 
-    # Create a method to spit out a dictionary version of the course object for JSON serialization
-
+    # relationships
+    course_reviews = db.relationship('CourseReview', back_populates='courses')
+    user_course = db.relationship('UserCourse', back_populates='courses')
+    course_lessons = db.relationship('CourseLessons', back_populates='courses')
 
     def to_dict(self):
         return {
             "id": self.id,
             "course_name": self.course_name,
             "details_of_course": self.details_of_course,
+            "course_reviews": [cr.to_dict() for cr in self.course_reviews],
+            "user_course": [uc.to_dict() for uc in self.user_course],
+            "course_lessons": [cl.to_dict() for cl in self.course_lessons]
         }
